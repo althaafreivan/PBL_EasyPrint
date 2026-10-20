@@ -4,7 +4,7 @@
     <span>Easyprint</span>
   </a>
   <nav class="navbar__actions">
-    <a href="#" class="btn btn--outline">Masuk</a>
-    <a href="#" class="btn btn--primary">Daftar</a>
+    <a href="login.php" class="btn btn--outline">Masuk</a>
+    <a href="register.php" class="btn btn--primary">Daftar</a>
   </nav>
 </header>

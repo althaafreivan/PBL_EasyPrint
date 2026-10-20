@@ -1,3 +1,4 @@
+
 <?php
 // backend/public/index.php
 // Front Controller REST API - Native PHP
@@ -33,6 +34,11 @@ function jsonResponse(int $status, array $data): void
     exit;
 }
 
+// Muat controller
+require_once __DIR__ . '/../controllers/HealthController.php';
+require_once __DIR__ . '/../models/Layanan.php';
+require_once __DIR__ . '/../controllers/LayananController.php';
+
 // Koneksi database PostgreSQL melalui PDO
 try {
     require_once __DIR__ . '/../config/pdo.php';
@@ -48,28 +54,14 @@ try {
 // Baca path URL tanpa query string
 $uri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
 
-// Endpoint pemeriksaan kesehatan backend dan database
+// Routing endpoint
+// Routing endpoint
 if ($uri === '/api/health' && $method === 'GET') {
-    try {
-        $stmt = $pdo->query(
-            'SELECT current_database() AS database_name'
-        );
+    HealthController::index($pdo);
+}
 
-        $database = $stmt->fetch();
-
-        jsonResponse(200, [
-            'success' => true,
-            'message' => 'Backend EasyPrint berjalan.',
-            'database' => $database['database_name'],
-        ]);
-    } catch (PDOException $e) {
-        error_log('Health check failed: ' . $e->getMessage());
-
-        jsonResponse(500, [
-            'success' => false,
-            'message' => 'Pemeriksaan database gagal.',
-        ]);
-    }
+if ($uri === '/api/layanan' && $method === 'GET') {
+    LayananController::index($pdo);
 }
 
 // Endpoint yang belum tersedia

@@ -83,6 +83,8 @@ $dbRoutes = [
     '/api/me',
     '/api/orders',
     '/api/orders/upload',
+    '/api/reports/order-summary',
+    '/api/reports/order-details',
 ];
 
 if (
@@ -716,6 +718,71 @@ if (
 }
 
 
+// GET /api/reports/order-summary?start_date=2026-10-01&end_date=2026-10-31
+if ($uri === '/api/reports/order-summary' && $method === 'GET') {
+    $user = authenticateUser($pdo);
+
+    if (!in_array($user['role'], ['admin', 'owner'], true)) {
+        jsonResponse(403, [
+            'status' => 'error',
+            'message' => 'Hanya admin atau owner yang dapat melihat laporan.',
+        ]);
+    }
+
+    $startDate = $_GET['start_date'] ?? '';
+    $endDate = $_GET['end_date'] ?? '';
+
+    $isValidDate = static function (string $date): bool {
+        $parsed = DateTimeImmutable::createFromFormat('!Y-m-d', $date);
+
+        return $parsed !== false
+            && $parsed->format('Y-m-d') === $date;
+    };
+
+    if (
+        !$isValidDate($startDate) ||
+        !$isValidDate($endDate) ||
+        $startDate > $endDate
+    ) {
+        jsonResponse(422, [
+            'status' => 'error',
+            'message' => 'Tanggal tidak valid. Gunakan YYYY-MM-DD dan pastikan tanggal awal tidak melebihi tanggal akhir.',
+        ]);
+    }
+
+    try {
+        $stmt = $pdo->prepare(
+            'SELECT jumlah_pesanan, total_nilai_pesanan
+             FROM public.fn_ringkasan_pesanan(
+                 CAST(:tanggal_awal AS date),
+                 CAST(:tanggal_akhir AS date)
+             )'
+        );
+
+        $stmt->execute([
+            'tanggal_awal' => $startDate,
+            'tanggal_akhir' => $endDate,
+        ]);
+
+        jsonResponse(200, [
+            'status' => 'success',
+            'message' => 'Ringkasan pesanan berhasil diambil.',
+            'periode' => [
+                'tanggal_awal' => $startDate,
+                'tanggal_akhir' => $endDate,
+            ],
+            'data' => $stmt->fetch(),
+        ]);
+    } catch (Throwable $e) {
+        error_log('Order summary report failed: ' . $e->getMessage());
+
+        jsonResponse(500, [
+            'status' => 'error',
+            'message' => 'Gagal mengambil ringkasan pesanan.',
+        ]);
+    }
+}
+
 // ==================================================
 // ENDPOINT TIDAK DITEMUKAN
 // ==================================================
@@ -761,6 +828,77 @@ if ($uri === '/api/orders' && $method === 'GET') {
         ]);
     }
 }
+
+
+ // GET /api/reports/order-details?start_date=2026-10-01&end_date=2026-10-31
+if ($uri === '/api/reports/order-details' && $method === 'GET') {
+    $user = authenticateUser($pdo);
+
+    if (!in_array($user['role'], ['admin', 'owner'], true)) {
+        jsonResponse(403, [
+            'status' => 'error',
+            'message' => 'Hanya admin atau owner yang dapat melihat laporan.',
+        ]);
+    }
+
+    $startDate = $_GET['start_date'] ?? '';
+    $endDate = $_GET['end_date'] ?? '';
+
+    $isValidDate = static function (string $date): bool {
+        $parsed = DateTimeImmutable::createFromFormat('!Y-m-d', $date);
+
+        return $parsed !== false
+            && $parsed->format('Y-m-d') === $date;
+    };
+
+    if (
+        !$isValidDate($startDate) ||
+        !$isValidDate($endDate) ||
+        $startDate > $endDate
+    ) {
+        jsonResponse(422, [
+            'status' => 'error',
+            'message' => 'Tanggal tidak valid. Gunakan YYYY-MM-DD.',
+        ]);
+    }
+
+    try {
+        $stmt = $pdo->prepare(
+            'SELECT *
+             FROM public.v_detail_pesanan
+             WHERE created_at >= CAST(:tanggal_awal AS date)
+               AND created_at < CAST(:tanggal_akhir AS date) + INTERVAL \'1 day\'
+             ORDER BY created_at DESC, pesanan_id DESC'
+        );
+
+        $stmt->execute([
+            'tanggal_awal' => $startDate,
+            'tanggal_akhir' => $endDate,
+        ]);
+
+        $data = $stmt->fetchAll();
+
+        jsonResponse(200, [
+            'status' => 'success',
+            'message' => 'Detail laporan pesanan berhasil diambil.',
+            'periode' => [
+                'tanggal_awal' => $startDate,
+                'tanggal_akhir' => $endDate,
+            ],
+            'jumlah_detail' => count($data),
+            'data' => $data,
+        ]);
+
+    } catch (Throwable $e) {
+        error_log('Order details report failed: ' . $e->getMessage());
+
+        jsonResponse(500, [
+            'status' => 'error',
+            'message' => 'Gagal mengambil detail laporan pesanan.',
+        ]);
+    }
+}
+
 
 
 jsonResponse(404, [

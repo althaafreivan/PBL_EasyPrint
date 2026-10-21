@@ -105,8 +105,8 @@
         <p class="demo__label">Demo role</p>
 
         <div class="demo__pills">
-          <button type="button" class="tag tag--pelanggan">Pelanggan</button>
-          <button type="button" class="tag tag--admin">Admin</button>
+          <a href="dashboard.php" class="tag tag--pelanggan">Pelanggan</a>
+          <a href="admin-orders.php" class="tag tag--admin">Admin</a>
           <button type="button" class="tag tag--owner">Owner</button>
         </div>
       </div>

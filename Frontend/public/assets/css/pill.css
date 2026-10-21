@@ -1,0 +1,23 @@
+/* Ukuran SEMUA pill/badge/chip di dashboard pelanggan, admin, dan tracking */
+.pill, .badge, .chip {
+  display: inline-flex; align-items: center; justify-content: center;
+  box-sizing: border-box;
+  height: 28px; min-width: 96px; padding: 0 16px;
+  border: 0; border-radius: 999px;
+  font: inherit; font-size: 12px; font-weight: 700; line-height: 1;
+  white-space: nowrap;
+}
+
+/* Warna */
+.pill--soft, .chip--pending                    { background: #cbd5f3; color: #181f3a; }
+.pill--blue, .badge--diproses, .chip--diproses { background: #e3eafb; color: #4466c8; }
+.pill--green, .badge--selesai, .chip--selesai  { background: #e0f3ea; color: #2e9e6b; }
+.pill--yellow, .badge--pending                 { background: #fff1d6; color: #c98410; }
+
+/* Filter admin (bisa diklik) */
+.chip { cursor: pointer; transition: box-shadow .15s ease; }
+.chip--semua { background: #e9ecf7; color: #181f3a; }
+.chip--semua.is-active { background: #181f3a; color: #fff; }
+.chip.is-active:not(.chip--semua) { box-shadow: 0 0 0 2px #5f7bd8; }
+
+@media (prefers-reduced-motion: reduce) { .chip { transition: none; } }

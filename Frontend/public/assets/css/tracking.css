@@ -1,0 +1,67 @@
+/* ---------- Ringkasan ---------- */
+.track-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  margin-top: 40px; padding: 24px 24px 24px 26px;
+}
+.track-head__main {
+  display: grid; grid-template-columns: auto auto; justify-content: start;
+  align-items: center; gap: 14px 42px;
+}
+.track-head__code { font-size: 20px; font-weight: 700; }
+.track-head__total { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 22px; }
+.track-head__total span { font-size: 13px; color: var(--muted); }
+.track-head__total strong { font-size: 17px; font-weight: 700; }
+.btn-outline--icon { gap: 10px; padding: 0 40px; }
+
+/* ---------- Stepper ---------- */
+.stepper { list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); margin-top: 36px; }
+.stepper__item {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  font-size: 14px; font-weight: 600; color: var(--muted);
+}
+.stepper__dot {
+  position: relative; z-index: 1;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: #fff; border: 2px solid #dbe1f4;
+}
+/* garis penghubung ke langkah berikutnya */
+.stepper__item::after {
+  content: ""; position: absolute; top: 15px;
+  left: calc(50% + 17px); width: calc(100% - 34px); height: 4px;
+  border-radius: 2px; background: #dfe4f4;
+}
+.stepper__item:last-child::after { display: none; }
+
+.stepper__item.is-done,
+.stepper__item.is-current { color: var(--ink); font-weight: 700; }
+.stepper__item.is-done .stepper__dot,
+.stepper__item.is-current .stepper__dot { background: var(--primary); border-color: var(--primary); }
+.stepper__item.is-done::after { background: var(--primary); }
+
+/* ---------- Rincian ---------- */
+.detail { padding: 26px 26px 36px; }
+.detail__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px 40px; }
+.detail dt { font-size: 12px; font-weight: 600; color: var(--label); }
+.detail dd { margin-top: 4px; font-size: 14px; font-weight: 700; }
+
+/* ---------- Pesanan lainnya ---------- */
+.other { display: grid; gap: 10px; }
+.other__row {
+  display: grid; grid-template-columns: 200px 140px 1fr auto; align-items: center;
+  height: 54px; padding: 0 24px; border-radius: 16px;
+}
+.other__row strong { font-size: 13px; font-weight: 700; }
+.other__link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 700; color: var(--primary);
+}
+.other__link:hover { text-decoration: underline; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .track-head { flex-direction: column; align-items: flex-start; }
+  .stepper__item { font-size: 12px; text-align: center; }
+  .detail__grid { grid-template-columns: 1fr 1fr; }
+  .other__row { grid-template-columns: 1fr auto; height: auto; padding: 14px 18px; row-gap: 8px; }
+}

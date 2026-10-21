@@ -13,6 +13,23 @@ backend/storage/framework/sessions/*
 backend/storage/framework/views/*
 backend/storage/logs/*
 
+# File pengujian lokal yang berisi kredensial atau token
+/admin-login.json
+/login-test.json
+/order-test.json
+/owner-login.json
+/owner-status-test.json
+/register-test.json
+/status-test.json
+
+# Artefak lokal dan sisa scaffolding lama
+/backend/composer.phar
+/backend/database/database.sqlite
+/backend/bootstrap/cache/
+/backend/storage/uploads/
+/backend/index.laravel.backup.php
+/backend/test_connection.php
+
 # OS / Editor
 .DS_Store
 Thumbs.db

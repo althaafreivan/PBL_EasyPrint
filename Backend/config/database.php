@@ -9,7 +9,7 @@ $db     = 'easyprint_db';
 $user   = 'postgres';
 
 // Masukkan password PostgreSQL kamu di laptop sendiri.
-$pass = '';
+$pass = getenv('DB_PASS') ?: '';
 
 // DSN koneksi database
 $dsn = "$driver:host=$host;port=$port;dbname=$db";

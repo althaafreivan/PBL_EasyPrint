@@ -1,9 +1,4 @@
 <?php
-// Backend/controllers/InventoryController.php
-
-/**
- * Mengambil daftar bahan baku beserta status stoknya.
- */
 function getMaterials(PDO $pdo): void
 {
     header('Content-Type: application/json; charset=utf-8');
@@ -11,12 +6,12 @@ function getMaterials(PDO $pdo): void
     try {
         $stmt = $pdo->query("
             SELECT
-                id_bahan,
+                id,
                 nama_bahan,
                 stok,
                 satuan,
                 reorder_point,
-                harga_bahan_baku,
+                harga_satuan,
                 status,
                 CASE
                     WHEN stok <= reorder_point THEN 'Kritis'
@@ -46,7 +41,10 @@ function getMaterials(PDO $pdo): void
 
 /**
  * Menyesuaikan stok bahan baku secara manual.
- * Input yang dibutuhkan: id_bahan dan stok.
+ *
+ * Input:
+ * - bahan_baku_id: ID bahan baku yang akan diperbarui
+ * - stok: jumlah stok baru, boleh berupa angka desimal
  */
 function adjustStock(PDO $pdo, array $input): void
 {
@@ -54,59 +52,60 @@ function adjustStock(PDO $pdo, array $input): void
 
     // Validasi ID bahan baku.
     $idBahan = filter_var(
-        $input['id_bahan'] ?? null,
+        $input['bahan_baku_id'] ?? null,
         FILTER_VALIDATE_INT
     );
 
-    // Validasi jumlah stok baru.
-    $stokBaru = filter_var(
-        $input['stok'] ?? null,
-        FILTER_VALIDATE_INT
-    );
+    // Validasi stok: NUMERIC(10,2), sehingga desimal diperbolehkan.
+    $stokInput = $input['stok'] ?? null;
 
     if (
         $idBahan === false ||
         $idBahan === null ||
         $idBahan < 1 ||
-        $stokBaru === false ||
-        $stokBaru === null ||
-        $stokBaru < 0
+        !is_numeric($stokInput) ||
+        !is_finite((float) $stokInput) ||
+        (float) $stokInput < 0 ||
+        (float) $stokInput > 99999999.99
     ) {
         http_response_code(400);
 
         echo json_encode([
             'status' => 'error',
-            'message' => 'ID bahan harus positif dan stok tidak boleh negatif.'
+            'message' => 'ID bahan harus valid dan stok harus berupa angka nonnegatif dengan maksimal dua angka desimal.'
         ], JSON_UNESCAPED_UNICODE);
 
         return;
     }
 
+    // Simpan sebagai string numerik agar nilai desimal diteruskan ke PostgreSQL.
+    $stokBaru = trim((string) $stokInput);
+
     try {
         $stmt = $pdo->prepare("
             UPDATE bahan_baku
             SET
-                stok = :stok_baru,
+                stok = CAST(:stok_baru AS NUMERIC),
                 status = CASE
                     WHEN CAST(:stok_cek AS NUMERIC) <= reorder_point
                         THEN 'Kritis'
                     ELSE 'Aman'
                 END
-            WHERE id_bahan = :id_bahan
+            WHERE id = :bahan_baku_id
             RETURNING
-                id_bahan,
+                id,
                 nama_bahan,
                 stok,
                 satuan,
                 reorder_point,
-                harga_bahan_baku,
+                harga_satuan,
                 status
         ");
 
         $stmt->execute([
             ':stok_baru' => $stokBaru,
             ':stok_cek' => $stokBaru,
-            ':id_bahan' => $idBahan
+            ':bahan_baku_id' => $idBahan
         ]);
 
         $data = $stmt->fetch();

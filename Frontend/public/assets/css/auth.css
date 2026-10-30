@@ -1,0 +1,177 @@
+:root {
+  --navy: #181f3a;
+  --navy-2: #212c52;
+  --ink: #181f3a;
+  --muted: #6b7394;
+  --primary: #5f7bd8;
+  --field-line: #e6eaf8;
+  --soft: #f1f4fc;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body.auth {
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  color: var(--ink);
+  min-height: 100vh;
+  display: grid;
+  background: #fff;
+}
+.auth--login    { grid-template-columns: 40.3% 1fr; }
+.auth--register { grid-template-columns: 33.3% 1fr; }
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; border: 0; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+
+/* ---------- Panel kiri ---------- */
+.auth__side { background: var(--navy); color: #fff; padding: 48px 42px; }
+.auth--register .auth__side { padding: 44px 24px; }
+
+.auth__brand { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; }
+.auth__logo { width: 58px; height: 58px; border-radius: 50%; object-fit: cover; }
+
+.auth__intro { margin-top: 100px; padding: 0 22px; }
+.auth--register .auth__intro { margin-top: 72px; padding: 0 28px; }
+.auth__intro h1 { font-size: 34px; line-height: 1.2; font-weight: 700; letter-spacing: -.3px; }
+.auth--register .auth__intro h1 { font-size: 32px; }
+.auth__intro > p { margin-top: 14px; font-size: 18px; color: #c7cde6; }
+.auth--register .auth__intro > p { font-size: 17px; margin-bottom: 40px; }
+
+.auth__feature {
+  margin-top: 62px; max-width: 420px; min-height: 220px;
+  padding: 24px; border-radius: 22px; background: var(--navy-2);
+}
+.auth__feature h2 { font-size: 20px; font-weight: 700; }
+.auth__feature p { margin-top: 12px; font-size: 16px; line-height: 1.6; color: #c7cde6; }
+.auth__tags { display: flex; gap: 10px; margin-top: 28px; }
+
+/* ---------- Tag / pill ---------- */
+.tag { display: inline-block; padding: 6px 21px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+.tag--light     { background: #cfd8f5; color: var(--ink); }
+.tag--dark      { background: #28335e; color: #fff; padding: 10px 24px; }
+.tag--pelanggan { background: #cfd8f5; color: var(--ink); }
+.tag--admin     { background: #e9e8f8; color: var(--ink); }
+.tag--owner     { background: #e3efec; color: var(--ink); }
+
+/* ---------- Area kanan ---------- */
+.auth__main { padding: 130px 40px 60px; }
+.auth--register .auth__main { padding: 120px 40px 60px 80px; }
+
+.auth__form-wrap { width: 100%; max-width: 480px; margin-left: clamp(0px, 9vw, 140px); }
+
+.auth__title { font-size: 36px; font-weight: 700; letter-spacing: -.4px; }
+.auth__subtitle { margin-top: 12px; font-size: 15px; color: var(--muted); }
+
+/* Kartu registrasi */
+.auth__card {
+  width: 100%; max-width: 700px; min-height: 760px;
+  padding: 24px 50px 60px; border-radius: 28px; background: var(--soft);
+}
+.auth__title--sm { font-size: 28px; }
+.auth__subtitle--sm { margin-top: 6px; font-size: 14px; }
+
+/* ---------- Form ---------- */
+.form { margin-top: 44px; }
+.form--tight { margin-top: 22px; }
+
+.field { margin-bottom: 14px; }
+.field label { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #5d6585; }
+
+.input {
+  display: flex; align-items: center; gap: 12px;
+  height: 56px; padding: 0 18px;
+  background: #fff; border: 2px solid var(--field-line); border-radius: 14px;
+  transition: border-color .15s ease;
+}
+.input:focus-within { border-color: var(--primary); }
+.input svg { flex: none; color: #5d6585; }
+.input input {
+  flex: 1; min-width: 0; border: 0; outline: 0; background: transparent;
+  font: inherit; font-size: 16px; color: var(--ink);
+}
+.input input::placeholder { color: var(--muted); }
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.link { color: var(--primary); font-weight: 700; }
+.link:hover { text-decoration: underline; }
+.link--small { display: inline-block; margin-top: 4px; font-size: 14px; }
+
+.btn-submit {
+  display: block; width: 100%; height: 52px; margin-top: 52px;
+  border-radius: 999px; background: var(--primary); color: #fff;
+  font-size: 16px; font-weight: 700;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn-submit:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(95,123,216,.35); }
+.form--tight .btn-submit { margin-top: 30px; }
+
+.form__switch { margin-top: 20px; text-align: center; font-size: 15px; color: var(--muted); }
+.form__switch .link { margin-left: 4px; }
+
+
+/* Tombol kembali ke beranda */
+.back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.back-home span {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.back-home:hover {
+  color: var(--primary);
+  transform: translateX(-3px);
+}
+
+.back-home:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+
+/* Checkbox ketentuan */
+.check {
+  display: flex; align-items: center; gap: 12px;
+  margin-top: 30px; height: 54px; padding: 0 16px;
+  background: #fff; border: 2px solid var(--field-line); border-radius: 14px;
+  font-size: 15px; color: var(--muted); cursor: pointer;
+}
+.check input {
+  appearance: none; -webkit-appearance: none;
+  width: 18px; height: 18px; flex: none;
+  border: 2px solid #d3daf2; border-radius: 50%; background: #fff;
+}
+.check input:checked { border-color: var(--primary); background: radial-gradient(circle, var(--primary) 0 45%, #fff 50%); }
+
+/* ---------- Demo role ---------- */
+.demo { margin-top: 48px; padding-top: 34px; border-top: 2px solid var(--field-line); }
+.demo__label { font-size: 14px; font-weight: 600; color: #5d6585; }
+.demo__pills { display: flex; gap: 14px; margin-top: 20px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  body.auth { grid-template-columns: 1fr; }
+  .auth__side, .auth--register .auth__side { padding: 28px 24px 40px; }
+  .auth__intro, .auth--register .auth__intro { margin-top: 36px; padding: 0; }
+  .auth__feature { margin-top: 32px; min-height: 0; }
+  .auth__main, .auth--register .auth__main { padding: 40px 20px 60px; }
+  .auth__form-wrap { margin: 0 auto; }
+  .auth__card { margin: 0 auto; padding: 24px 24px 40px; min-height: 0; }
+}
+@media (max-width: 560px) {
+  .field-row { grid-template-columns: 1fr; gap: 0; }
+  .auth__title { font-size: 30px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-submit, .input { transition: none; }
+}

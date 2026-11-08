@@ -287,9 +287,10 @@ if ($uri === '/api/orders' && $method === 'POST') {
         $contentType = $_SERVER['CONTENT_TYPE'] ?? '';
         $isMultipart = stripos($contentType, 'multipart/form-data') === 0;
 
-        if ($isMultipart) {
+       if ($isMultipart) {
             $data = $_POST;
-            $items = json_decode($data['items'] ?? '', true);
+            $itemsRaw = $data['items'] ?? '';
+            $items = json_decode($itemsRaw, true);
         } else {
             $data = json_decode(file_get_contents('php://input'), true);
             $items = is_array($data) ? ($data['items'] ?? null) : null;
@@ -463,9 +464,40 @@ if ($uri === '/api/orders' && $method === 'POST') {
                 'subtotal' => $item['subtotal'],
                 'file_dokumen' => $index === 0 ? $fileName : null,
             ]);
-        }
+            }
 
-        $pdo->commit();
+            // Buat notifikasi ketika pesanan berhasil diajukan.
+            $stmtNotif = $pdo->prepare(
+            'INSERT INTO public.notifikasi
+                (pesanan_id, judul, pesan)
+                VALUES
+                (:pesanan_id, :judul, :pesan)
+                RETURNING id'
+            );
+
+            $stmtNotif->execute([
+            'pesanan_id' => $pesanan['id'],
+            'judul' => 'Pesanan Dibuat',
+            'pesan' => 'Pesanan ' . $pesanan['kode_pesanan']
+                . ' berhasil dibuat dan menunggu verifikasi.',
+            ]);
+
+            $notifikasiId = $stmtNotif->fetchColumn();
+
+            // Hubungkan notifikasi dengan akun pelanggan.
+            $stmtNotifUser = $pdo->prepare(
+            'INSERT INTO public.notifikasi_users
+                (notifikasi_id, user_id, is_read)
+                VALUES
+                (:notifikasi_id, :user_id, FALSE)'
+            );
+
+            $stmtNotifUser->execute([
+            'notifikasi_id' => $notifikasiId,
+            'user_id' => $user['id'],
+            ]);
+
+            $pdo->commit();
 
         http_response_code(201);
         echo json_encode([

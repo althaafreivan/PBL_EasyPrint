@@ -81,6 +81,7 @@ CREATE TABLE IF NOT EXISTS pesanan (
     status VARCHAR(40) NOT NULL DEFAULT 'Pending',
     total_harga NUMERIC(12,2) NOT NULL DEFAULT 0,
     catatan VARCHAR(255) NOT NULL,
+    stok_dipotong BOOLEAN NOT NULL DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_pesanan_users
@@ -88,7 +89,6 @@ CREATE TABLE IF NOT EXISTS pesanan (
         REFERENCES users(id)
         ON DELETE RESTRICT
 );
-
 
 -- =========================================================
 -- 6. TABEL DETAIL_PESANAN

@@ -1,4 +1,4 @@
-/* Ukuran SEMUA pill/badge/chip di dashboard pelanggan, admin, dan tracking */
+/* Ukuran SEMUA pill/badge/chip di semua halaman */
 .pill, .badge, .chip {
   display: inline-flex; align-items: center; justify-content: center;
   box-sizing: border-box;
@@ -13,6 +13,8 @@
 .pill--blue, .badge--diproses, .chip--diproses { background: #e3eafb; color: #4466c8; }
 .pill--green, .badge--selesai, .chip--selesai  { background: #e0f3ea; color: #2e9e6b; }
 .pill--yellow, .badge--pending                 { background: #fff1d6; color: #c98410; }
+.pill--tertunda { background: #fff4dc; color: #8a5d0c; border: 1px solid #f0c36d; }
+.pill--red { background: #fde6e9; color: #d9566a; }
 
 /* Filter admin (bisa diklik) */
 .chip { cursor: pointer; transition: box-shadow .15s ease; }

@@ -1,0 +1,11 @@
+<?php
+// Data contoh. Nanti diganti data dari backend API.
+// ikon: clock | printer | check | alert | cash | info   warna tag: yellow | blue | green | red
+return [
+  ['id' => 1, 'grup' => 'Hari ini',   'ikon' => 'clock',   'baru' => true,  'judul' => 'Pesanan tertunda',        'isi' => 'Kertas F4 sedang habis. Pesanan dilanjutkan otomatis setelah pasokan tiba (est. 10 Okt). Tanpa biaya tambahan.', 'meta' => '#RI-20261008-016', 'waktu' => '10.05', 'tag' => 'Tertunda',     'warna' => 'yellow'],
+  ['id' => 2, 'grup' => 'Hari ini',   'ikon' => 'printer', 'baru' => true,  'judul' => 'Pesanan sedang diproses', 'isi' => 'Print Dokumen 40 lembar sedang dicetak. Estimasi selesai ± 15.00 WIB.',                                          'meta' => '#RI-20261008-014', 'waktu' => '09.35', 'tag' => 'Diproses',     'warna' => 'blue'],
+  ['id' => 3, 'grup' => 'Kemarin',    'ikon' => 'check',   'baru' => true,  'judul' => 'Pesanan siap diambil',    'isi' => 'Print Dokumen 20 lembar warna + jilid sudah selesai. Tunjukkan nomor pesanan di kasir.',                      'meta' => '#RI-20261007-009', 'waktu' => '16.40', 'tag' => 'Siap diambil', 'warna' => 'green'],
+  ['id' => 4, 'grup' => 'Kemarin',    'ikon' => 'alert',   'baru' => false, 'judul' => 'Pesanan ditolak',         'isi' => 'Berkas surat-keterangan-scan.pdf buram. Lihat alasan penolakan di halaman tracking.',                         'meta' => '#RI-20261007-011', 'waktu' => '14.05', 'tag' => 'Ditolak',      'warna' => 'red'],
+  ['id' => 5, 'grup' => 'Sebelumnya', 'ikon' => 'cash',    'baru' => false, 'judul' => 'Pembayaran diterima',     'isi' => 'Pembayaran Rp 15.000 untuk Jilid Spiral telah diterima. Terima kasih!',                                       'meta' => '#RI-20261005-002', 'waktu' => '6 Okt', 'tag' => 'Lunas',        'warna' => 'green'],
+  ['id' => 6, 'grup' => 'Sebelumnya', 'ikon' => 'info',    'baru' => false, 'judul' => 'Info jam operasional',    'isi' => 'Hari Minggu outlet buka 08.00–14.00 WIB. Pesanan online tetap bisa dikirim.',                                  'meta' => 'Restu Ibu',        'waktu' => '4 Okt', 'tag' => 'Info',         'warna' => 'blue'],
+];

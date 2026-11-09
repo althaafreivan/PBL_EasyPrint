@@ -13,7 +13,7 @@ $steps = [
   [
     'img'   => 'Step3_Container.png',
     'title' => 'Pesanan Selesai',
-    'desc'  => 'Tunggu konfirmasi dari admin, dan Anda akan langsung tahu saat pesanan siap diambil atau dikirim.',
+    'desc'  => 'Tunggu konfirmasi dari admin, dan Anda akan langsung tahu saat pesanan siap diambil di outlet.',
   ],
 ];
 ?>
@@ -37,11 +37,11 @@ $steps = [
       <div class="hero__text">
         <span class="hero__badge">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.1V12a9 9 0 1 1-5.3-8.2"/><path d="m9 11 3 3L22 4"/></svg>
-          Platform cetak dokumen no.1 di Polinema
+          Pesan cetak online, ambil di outlet
         </span>
         <h1>Solusi Cetak Dokumen <em>Cepat</em> &amp; Terintegrasi</h1>
         <p>Sistem informasi ini dirancang untuk membantu pengelolaan proses bisnis pada UMKM Percetakan, khususnya dalam pencatatan pesanan, transaksi penjualan, dan pengelolaan stok. Sistem dikembangkan berdasarkan hasil observasi terhadap proses bisnis yang berjalan pada UMKM tersebut.</p>
-        <a href="#" class="btn btn--primary btn--lg">
+        <a href="login.php" class="btn btn--primary btn--lg">
           Mulai Cetak Sekarang
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
         </a>
@@ -51,7 +51,7 @@ $steps = [
         <img src="assets/images/Hero_Media.png" alt="Printer HP di ruang cetak" class="hero__img">
         <div class="chip chip--stock">
           <span class="chip__icon chip__icon--chart" aria-hidden="true"></span>
-          <span>Stok Kertas:<br>Aman</span>
+          <span>Pembayaran:<br>Tunai di outlet</span>
         </div>
         <div class="chip chip--status">
           <span class="chip__icon chip__icon--ok" aria-hidden="true">

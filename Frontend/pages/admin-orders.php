@@ -1,82 +1,108 @@
 <?php
-$orders = require __DIR__ . '/../includes/mock/orders.php';
-$active = 'pesanan';
+$data  = require __DIR__ . '/../includes/mock/orders.php';
+$bahan = array_column(require __DIR__ . '/../includes/mock/inventory.php', 'nama');
+$active = 'antrean'; $role = 'admin'; $pageTitle = 'Antrean Pesanan';
+
+include __DIR__ . '/../components/admin-head.php';
+include __DIR__ . '/../components/sidebar-admin.php';
+
+$tab = ['semua' => 'Semua', 'pending' => 'Pending', 'tertunda' => 'Tertunda', 'diproses' => 'Diproses', 'selesai' => 'Selesai'];
+$x = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>';
 ?>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Antrean Pesanan - EasyPrint Admin</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/admin.css">
-  <link rel="stylesheet" href="assets/css/pill.css">
-</head>
-<body class="admin">
-  <?php include __DIR__ . '/../components/sidebar-admin.php'; ?>
-
   <div class="admin__main">
-    <header class="topbar">
-      <div>
-        <h1>Antrean Pesanan</h1>
-        <p>Verifikasi berkas dan perbarui status produksi.</p>
-      </div>
-      <div class="topbar__right">
-        <button type="button" class="bell" aria-label="Notifikasi">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>
-        </button>
-        <span class="avatar avatar--sm">RI</span>
-      </div>
-    </header>
+    <?php $title = 'Antrean Pesanan'; $subtitle = 'Periksa berkas & ketersediaan bahan, lalu ubah status pesanan.'; include __DIR__ . '/../components/topbar-admin.php'; ?>
 
-    <!-- FILTER -->
-    <section class="card filter" aria-label="Filter pesanan">
-      <div>
-        <span class="label">Filter status</span>
-        <div class="filter__pills" role="group" aria-label="Filter status">
-          <button type="button" class="chip chip--semua is-active" data-filter="semua" aria-pressed="true">Semua</button>
-          <button type="button" class="chip chip--pending"  data-filter="pending"  aria-pressed="false">Pending</button>
-          <button type="button" class="chip chip--diproses" data-filter="diproses" aria-pressed="false">Diproses</button>
-          <button type="button" class="chip chip--selesai"  data-filter="selesai"  aria-pressed="false">Selesai</button>
+    <section class="card qcard" aria-label="Antrean pesanan">
+      <div class="qtools">
+        <div class="qtabs" role="group" aria-label="Filter status">
+          <?php foreach ($tab as $key => $label): ?>
+            <button type="button" class="qtab<?= $key === 'semua' ? ' is-active' : '' ?>" data-filter="<?= $key ?>" aria-pressed="<?= $key === 'semua' ? 'true' : 'false' ?>"><?= $label ?> <span id="cnt-<?= $key ?>"><?= $data['hitung'][$key] ?></span></button>
+          <?php endforeach; ?>
         </div>
+        <label class="qsearch">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-3.5-3.5"/></svg>
+          <input type="search" id="cari" placeholder="Cari ID / pelanggan" autocomplete="off" aria-label="Cari ID atau pelanggan">
+        </label>
       </div>
 
-      <label class="search">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-3.5-3.5"/></svg>
-        <input type="search" id="cari" placeholder="Cari ID / pelanggan" autocomplete="off">
-      </label>
+      <div class="qscroll">
+        <table class="qt">
+          <thead>
+            <tr>
+              <th scope="col">Pesanan</th><th scope="col">Layanan</th><th scope="col">Berkas</th>
+              <th scope="col" class="r">Total</th><th scope="col">Status</th><th scope="col">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="qBody"></tbody>
+        </table>
+      </div>
+      <p class="qempty" id="qEmpty" role="status" hidden>Tidak ada pesanan yang cocok.</p>
+
+      <div class="qfoot">
+        <span id="qInfo"></span>
+        <span>Stok bahan dipotong otomatis saat status menjadi <strong>Diproses</strong>.</span>
+      </div>
     </section>
 
-    <!-- TABEL -->
-    <section class="card table-card" aria-label="Daftar pesanan">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Pesanan</th>
-            <th scope="col">Pelanggan</th>
-            <th scope="col">Layanan</th>
-            <th scope="col">Total</th>
-            <th scope="col">Status</th>
-            <th scope="col">Aksi</th>
-          </tr>
-        </thead>
-        <tbody id="orderBody"></tbody>
-      </table>
-      <p class="table__empty" id="emptyMsg" hidden>Tidak ada pesanan yang cocok.</p>
-
-      <div class="file-box" aria-live="polite">
-        <span class="label">Berkas terpilih</span>
-        <div class="file-box__row">
-          <strong id="fileName">-</strong>
-          <button type="button" class="btn-white" id="btnPreview">Preview</button>
+    <!-- Popup: Tunda -->
+    <dialog class="mdl" id="dlgTunda" aria-labelledby="tdTitle">
+      <form class="mdl__form" id="formTunda">
+        <div class="mdl__head">
+          <div>
+            <h2 id="tdTitle">Tunda pesanan</h2>
+            <p class="mdl__sub">Gunakan bila stok bahan tidak mencukupi pesanan. Status menjadi “Tertunda – Stok Tidak Tersedia”.</p>
+          </div>
+          <button type="button" class="mdl__x" data-tutup aria-label="Tutup"><?= $x ?></button>
         </div>
-      </div>
-    </section>
+        <p class="mdl__alert" id="tdAlert"></p>
+        <div class="mdl__row">
+          <div><label class="lbl" for="tdBahan">Bahan yang tidak tersedia</label><select id="tdBahan"></select></div>
+          <div><label class="lbl" for="tdTgl">Perkiraan stok tersedia</label><input type="date" id="tdTgl" value="2026-10-10" required></div>
+        </div>
+        <div><label class="lbl" for="tdPesan">Pesan untuk pelanggan</label><textarea id="tdPesan" required></textarea></div>
+        <p class="mdl__hint">Pesan tampil di halaman tracking pelanggan. Stok belum dipotong selama pesanan tertunda.</p>
+        <div class="mdl__actions">
+          <button type="button" class="mdl__btn" data-tutup>Batal</button>
+          <button type="submit" class="mdl__btn mdl__btn--amber">Tunda pesanan</button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- Popup: Tolak -->
+    <dialog class="mdl" id="dlgTolak" aria-labelledby="tlTitle">
+      <form class="mdl__form" id="formTolak">
+        <div class="mdl__head">
+          <div>
+            <h2 id="tlTitle">Tolak pesanan</h2>
+            <p class="mdl__sub">Status menjadi Ditolak dan alasan penolakan tampil di halaman tracking pelanggan.</p>
+          </div>
+          <button type="button" class="mdl__x" data-tutup aria-label="Tutup"><?= $x ?></button>
+        </div>
+        <fieldset class="mdl__opts">
+          <legend class="sr-only">Alasan penolakan</legend>
+          <label class="mdl__opt"><input type="radio" name="alasan" value="buram" checked> Berkas tidak terbaca / buram</label>
+          <label class="mdl__opt"><input type="radio" name="alasan" value="format"> Format berkas tidak didukung</label>
+          <label class="mdl__opt"><input type="radio" name="alasan" value="spek"> Spesifikasi tidak sesuai berkas</label>
+          <label class="mdl__opt"><input type="radio" name="alasan" value="permanen"> Tidak dapat dipenuhi (permanen)</label>
+          <label class="mdl__opt"><input type="radio" name="alasan" value="lain"> Lainnya</label>
+        </fieldset>
+        <div><label class="lbl" for="tlCatatan">Catatan untuk pelanggan</label><textarea id="tlCatatan" required></textarea></div>
+        <p class="mdl__alert mdl__alert--warn">Stok bahan habis sementara? Gunakan <strong>Tunda</strong>, bukan Tolak.</p>
+        <div class="mdl__actions">
+          <button type="button" class="mdl__btn" data-tutup>Batal</button>
+          <button type="submit" class="mdl__btn mdl__btn--danger">Tolak pesanan</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" hidden></div>
   </div>
 
-  <script>window.ORDERS = <?= json_encode($orders, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) ?>;</script>
+  <script>
+    window.ORDERS = <?= json_encode($data['orders'], JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) ?>;
+    window.HITUNG = <?= json_encode($data['hitung'], JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) ?>;
+    window.BAHAN_OPSI = <?= json_encode($bahan, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) ?>;
+  </script>
   <script src="assets/js/admin-orders.js"></script>
 </body>
 </html>

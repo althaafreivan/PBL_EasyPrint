@@ -41,7 +41,7 @@
         Lengkapi data berikut untuk membuat akun.
       </p>
 
-      <form action="#" method="post" class="form form--tight">
+      <form action="login.php" method="post" class="form form--tight">
         <div class="field">
           <label for="nama">Nama</label>
           <div class="input">

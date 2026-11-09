@@ -1,0 +1,13 @@
+<?php
+// Data contoh. Nanti diganti data dari backend API.
+// ikon: box | warning | check | truck   warna tag: soft | yellow | green
+return [
+  ['id' => 1, 'grup' => 'hari-ini', 'ikon' => 'box',     'baru' => true,  'judul' => 'Pesanan baru masuk',          'isi' => 'CV Mitra Karya membuat pesanan cetak brosur baru.',                          'meta' => '#EP-2048',          'waktu' => '8 mnt lalu',  'tag' => 'Pesanan baru',    'warna' => 'soft'],
+  ['id' => 2, 'grup' => 'hari-ini', 'ikon' => 'warning', 'baru' => true,  'judul' => 'Stok bahan menipis',          'isi' => 'Kertas A4 80 gsm tersisa 12 rim. Periksa stok sebelum menerima pesanan berikutnya.', 'meta' => 'Gudang bahan baku', 'waktu' => '32 mnt lalu', 'tag' => 'Perlu perhatian', 'warna' => 'yellow'],
+  ['id' => 3, 'grup' => 'hari-ini', 'ikon' => 'check',   'baru' => true,  'judul' => 'Pembayaran diterima',         'isi' => 'Pembayaran Rp 1.250.000 telah berhasil dikonfirmasi.',                       'meta' => 'INV-1048',          'waktu' => '1 jam lalu',  'tag' => 'Lunas',           'warna' => 'green'],
+  ['id' => 4, 'grup' => 'hari-ini', 'ikon' => 'box',     'baru' => true,  'judul' => 'Revisi desain disetujui',     'isi' => 'Pelanggan menyetujui revisi desain untuk pesanan kartu undangan.',           'meta' => '#EP-2049',          'waktu' => '2 jam lalu',  'tag' => 'Siap produksi',   'warna' => 'soft'],
+  ['id' => 5, 'grup' => 'hari-ini', 'ikon' => 'check',   'baru' => false, 'judul' => 'Pesanan selesai diproduksi',  'isi' => 'Pesanan banner PT Nusa Kreatif selesai dan lolos pemeriksaan kualitas.',      'meta' => '#EP-2046',          'waktu' => '3 jam lalu',  'tag' => 'Selesai',         'warna' => 'green'],
+  ['id' => 6, 'grup' => 'kemarin',  'ikon' => 'truck',   'baru' => false, 'judul' => 'Pesanan siap diambil',        'isi' => 'Pesanan kartu nama Studio Arunika sudah selesai dan siap diambil.',          'meta' => '#EP-2047',          'waktu' => '16.40',       'tag' => 'Siap diambil',    'warna' => 'soft'],
+  ['id' => 7, 'grup' => 'kemarin',  'ikon' => 'warning', 'baru' => false, 'judul' => 'Pesanan belum diambil',       'isi' => 'Pesanan kartu selesai masih menunggu pengambilan dari pelanggan.',           'meta' => '#EP-2043',          'waktu' => '17.10',       'tag' => 'Menunggu',        'warna' => 'yellow'],
+  ['id' => 8, 'grup' => 'kemarin',  'ikon' => 'check',   'baru' => false, 'judul' => 'Stok tinta cyan diperbarui',  'isi' => 'Stok tinta cyan tersedia setelah barang masuk dicatat di sistem.',           'meta' => 'Gudang bahan baku', 'waktu' => '15.45',       'tag' => 'Stok aman',       'warna' => 'green'],
+];

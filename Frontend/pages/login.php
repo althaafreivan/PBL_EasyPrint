@@ -98,7 +98,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </div>
         </div>
 
-        <a href="#" class="link link--small">Lupa password?</a>
+        <a href="forgot-password.php" class="link link--small">
+            Lupa password?
+        </a>
 
         <button type="submit" class="btn-submit">Masuk</button>
 

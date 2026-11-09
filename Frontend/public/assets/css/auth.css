@@ -158,6 +158,26 @@ button { font-family: inherit; border: 0; cursor: pointer; }
 .demo__label { font-size: 14px; font-weight: 600; color: #5d6585; }
 .demo__pills { display: flex; gap: 14px; margin-top: 20px; }
 
+.auth-message {
+    padding: 13px 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.auth-message--success {
+    color: #236b45;
+    background: #eaf7ef;
+    border: 1px solid #c7e8d2;
+}
+
+.auth-message--error {
+    color: #a52b35;
+    background: #fff0f0;
+    border: 1px solid #f2cccc;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   body.auth { grid-template-columns: 1fr; }

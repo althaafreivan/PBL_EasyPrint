@@ -1,0 +1,183 @@
+/* =====================================================================
+   integrasi.css - gaya tambahan untuk elemen hasil integrasi FE <-> BE
+   (toast, pesan error, panel detail antrean, katalog landing, dll).
+   Mengikuti palet desain: navy #181f3a, primary #5f7bd8, line #e6eaf8.
+   ===================================================================== */
+
+/* ---------- Toast ---------- */
+.ep-toasts { position: fixed; right: 24px; bottom: 24px; z-index: 1000; display: flex; flex-direction: column; gap: 10px; max-width: min(420px, calc(100vw - 48px)); }
+.ep-toast { padding: 12px 18px; border-radius: 12px; background: #181f3a; color: #fff; font: 600 13px/1.45 Inter, system-ui, sans-serif; box-shadow: 0 10px 30px rgba(24, 31, 58, .25); animation: epIn .2s ease-out; transition: opacity .4s, transform .4s; }
+.ep-toast--ok { background: #1f7a52; }
+.ep-toast--err { background: #b93a4e; }
+.ep-toast--warn { background: #9a6410; }
+.ep-toast.is-out { opacity: 0; transform: translateY(8px); }
+@keyframes epIn { from { opacity: 0; transform: translateY(8px); } }
+
+/* ---------- Pesan di halaman ---------- */
+.ep-alert, .form-alert { margin: 0 0 18px; padding: 12px 16px; border-radius: 12px; font-size: 13px; line-height: 1.5; background: #e9effc; color: #29407e; border: 1px solid #cfdaf5; }
+.ep-alert--err, .form-alert--err { background: #fff0f2; color: #8f2a3b; border-color: #f3c3ca; }
+.ep-alert--ok { background: #e7f6ee; color: #1f6e4b; border-color: #bfe5d0; }
+.ep-alert--warn { background: #fff6e1; color: #7a5410; border-color: #f0d9a0; }
+.form-alert div + div { margin-top: 4px; }
+.auth .form-alert { margin-top: 6px; }
+
+/* ---------- Landing: katalog dari API ---------- */
+.lp-katalog { max-width: 1180px; margin: 0 auto; padding: 72px 24px 80px; }
+.lp-katalog__head { text-align: center; margin-bottom: 32px; }
+.lp-katalog__head h2 { font-size: 30px; font-weight: 800; color: #161b3a; }
+.lp-katalog__head p { margin-top: 8px; color: #4b5175; }
+.lp-katalog__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.lp-katalog__card { padding: 24px; border: 1px solid #d3daf2; border-radius: 20px; background: #fff; box-shadow: 0 8px 24px rgba(22, 27, 58, .05); }
+.lp-katalog__card h3 { font-size: 18px; margin-bottom: 14px; color: #5b6fcf; }
+.lp-katalog__card ul { list-style: none; display: grid; gap: 12px; }
+.lp-katalog__card li { display: flex; justify-content: space-between; gap: 14px; padding-bottom: 12px; border-bottom: 1px dashed #e3e8f7; font-size: 14px; }
+.lp-katalog__card li:last-child { border-bottom: 0; padding-bottom: 0; }
+.lp-katalog__card small { display: block; font-size: 12px; color: #6b7394; font-weight: 400; margin-top: 2px; }
+.lp-katalog__card strong { white-space: nowrap; text-align: right; }
+.lp-katalog__card strong small { display: inline; margin-left: 2px; }
+.lp-katalog__err { text-align: center; color: #8f2a3b; }
+.lp-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
+.lp-info div { padding: 16px 20px; border-radius: 16px; background: #161d3b; color: #fff; font-size: 13px; }
+.lp-info strong { display: block; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: #aebcf0; }
+
+/* ---------- Umum ---------- */
+.steps { overflow: hidden; } /* dekorasi lingkaran landing tidak lagi membuat scroll horizontal */
+.ep-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ep-sechead { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.sidebar__link--out { margin-top: 12px; opacity: .8; }
+.mini--danger { color: #b93a4e; cursor: pointer; font-family: inherit; }
+.mini--danger:hover { border-color: #d9566a; }
+.orders__empty, .opt__empty { padding: 28px 0 !important; text-align: center; color: #6b7394; }
+.orders__empty a { color: #5f7bd8; font-weight: 600; }
+.nitem.is-link { cursor: pointer; }
+.sec-hint { font-size: 12px; font-weight: 500; color: #6b7394; }
+.is-off td { opacity: .6; }
+.kpi__value--sm { font-size: 20px !important; line-height: 1.25; }
+.chart__label--val { font-size: 11px; font-weight: 700; fill: #5f7bd8; }
+
+/* ---------- Order form ---------- */
+.spec__wide { grid-column: 1 / -1; }
+.notice--ok { background: #e7f6ee; border: 1px solid #bfe5d0; color: #1f6e4b; margin-top: 18px; }
+.notice--ok .notice__ico { background: #cdeedd; }
+.trk-head__right { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.notice--hold { margin-top: 18px; }
+
+/* ---------- Profil ---------- */
+.ep-profile { margin-top: 24px; padding: 28px; display: grid; gap: 16px; max-width: 760px; }
+.ep-profile__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.ep-profile__sub { margin-top: 8px; font-size: 15px; }
+.ep-profile__sub small { font-weight: 500; color: #6b7394; }
+.pfld-lite { display: grid; gap: 6px; }
+.pfld-lite label { font-size: 12px; font-weight: 600; color: #5d6585; }
+.pfld-lite input:disabled { background: #f4f6fc; color: #6b7394; }
+.ep-profile .btn-cta { justify-self: start; border: 0; cursor: pointer; font-family: inherit; }
+
+/* ---------- Dialog prompt (alasan tolak/tunda) ---------- */
+.ep-prompt { display: grid; gap: 10px; min-width: min(440px, 80vw); }
+.ep-prompt h2 { font-size: 17px; }
+.ep-label { font-size: 12px; font-weight: 600; color: #5d6585; }
+.ep-input { width: 100%; padding: 10px 12px; border: 1px solid #d5dcf1; border-radius: 10px; font: inherit; font-size: 13px; resize: vertical; }
+.ep-input:focus { outline: 2px solid #5f7bd8; border-color: transparent; }
+
+/* ---------- Antrean admin ---------- */
+.chip--f { background: #eef1fa; color: #181f3a; }
+.chip__n { margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: rgba(24, 31, 58, .08); font-size: 11px; }
+.filter__pills { flex-wrap: wrap; }
+.aq-grid { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 20px; align-items: start; margin-top: 24px; }
+.aq-grid .table-card { margin-top: 0; min-height: 0; }
+/* Tabel antrean versi ringkas agar kolom Total/Status/Aksi tidak terpotong di samping panel detail */
+.aq-grid .table td { height: auto; padding: 14px 8px; vertical-align: middle; font-size: 13px; }
+.aq-grid .table th { padding-left: 8px; padding-right: 8px; }
+.aq-grid .table th, .aq-grid .table td { width: auto !important; }
+.aq-grid .table td:nth-child(2) { white-space: normal; min-width: 140px; }
+.aq-grid .table td:nth-child(5) .actions { flex-wrap: wrap; gap: 6px; }
+.aq-grid .table .btn { height: 32px; padding: 0 14px; font-size: 12px; }
+.aq-grid .table .pill { min-width: 0; }
+.aq-sub { display: block; margin-top: 2px; font-size: 11px; font-weight: 500; color: #6b7394; }
+.aq-file { font-size: 12px; }
+.aq-info { margin-top: 10px; font-size: 12px; color: #6b7394; }
+.table tbody tr.is-selected { background: #eef2fd; }
+.table tbody tr[data-id] { cursor: pointer; }
+.table .actions { flex-wrap: wrap; }
+.aq-detail { position: sticky; top: 20px; padding: 22px; max-height: calc(100vh - 40px); overflow-y: auto; }
+.aq-detail__empty { color: #6b7394; font-size: 13px; text-align: center; padding: 30px 6px; }
+.aq-detail__head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+.aq-detail__head h2 { font-size: 18px; }
+.aq-detail__head p { margin-top: 2px; font-size: 12.5px; color: #6b7394; }
+.aq-detail h3 { margin: 18px 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: #5d6585; display: flex; align-items: center; gap: 8px; }
+.aq-list { list-style: none; display: grid; gap: 8px; font-size: 13px; }
+.aq-list li { display: flex; justify-content: space-between; gap: 10px; }
+.aq-list small { display: block; font-size: 11.5px; color: #6b7394; }
+.aq-list__total { padding-top: 8px; border-top: 1px solid #e6eaf8; font-weight: 700; }
+.aq-muted { font-size: 13px; color: #4b5175; }
+.aq-keb { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.aq-keb th { text-align: left; font-size: 11px; color: #6b7394; font-weight: 600; padding: 4px 0; }
+.aq-keb td { padding: 5px 0; border-top: 1px solid #eef1fa; }
+.aq-keb tr.is-kurang td { color: #b93a4e; font-weight: 600; }
+.aq-warn { margin-top: 10px; padding: 10px 12px; border-radius: 10px; background: #fff6e1; color: #7a5410; font-size: 12.5px; }
+.aq-log { list-style: none; display: grid; gap: 6px; font-size: 12.5px; }
+.aq-log time { display: inline-block; min-width: 128px; margin-right: 6px; color: #6b7394; font-variant-numeric: tabular-nums; }
+.aq-actions { margin-top: 18px; padding-top: 16px; border-top: 1px solid #e6eaf8; }
+.file-box__row .btn-white { text-decoration: none; display: inline-flex; align-items: center; }
+
+/* ---------- Kasir ---------- */
+.ks-ready, .ks-multi { margin: 14px 0 18px; }
+.ks-ready__list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+.ks-chip { display: grid; gap: 2px; padding: 10px 14px; border: 1px solid #d5dcf1; border-radius: 12px; background: #fff; text-align: left; cursor: pointer; font: inherit; font-size: 12px; }
+.ks-chip:hover { border-color: #5f7bd8; }
+.ks-chip strong { font-size: 13px; }
+.ks-chip span { color: #6b7394; }
+.ks-select { height: 32px; padding: 0 12px; border: 1px solid #d5dcf1; border-radius: 999px; font: inherit; font-size: 12px; font-weight: 700; background: #fff; }
+.ks-select:disabled { background: #eef1fa; color: #6b7394; }
+a.btn-ghost { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+
+/* ---------- Stok ---------- */
+.stk-log { list-style: none; display: grid; gap: 6px; margin-top: 10px; font-size: 12.5px; }
+.stk-log li { display: grid; grid-template-columns: 104px 120px 1fr; gap: 8px; align-items: baseline; }
+.stk-log time { color: #6b7394; }
+.stk-log__q { font-weight: 700; font-variant-numeric: tabular-nums; }
+.stk-log__q--in { color: #1f7a52; }
+.stk-log__q--out { color: #b93a4e; }
+
+/* ---------- Laporan ---------- */
+.rep-count { font-size: 12px; font-weight: 500; color: #6b7394; margin-left: 8px; }
+.rep-circ td, .rep-circ th { padding: 8px 6px !important; }
+.rep-in { color: #1f7a52; font-weight: 600; }
+.rep-out { color: #b93a4e; font-weight: 600; }
+.circ small { color: #6b7394; font-weight: 500; }
+
+/* ---------- Invoice dibuka admin/owner (tanpa navbar pelanggan) ---------- */
+body.app--staff .page { padding-top: 32px; }
+
+/* ---------- Responsif ---------- */
+@media (max-width: 1100px) {
+  .aq-grid { grid-template-columns: 1fr; }
+  .aq-detail { position: static; max-height: none; }
+}
+@media (max-width: 640px) {
+  .stk-log li { grid-template-columns: 1fr; gap: 2px; }
+  .lp-katalog__card li { flex-direction: column; }
+  .lp-katalog__card strong { text-align: left; }
+}
+
+@media print {
+  .ep-toasts, .sidebar, .topbar, .appbar, .filter-bar, .notif-panel, .notif-overlay { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) { .ep-toast { animation: none; transition: none; } }
+
+/* ---------- Penyesuaian tata letak hasil uji visual ---------- */
+.table-card--stock .actions, .table-card--inv .actions, .table-card--svc .actions { flex-wrap: nowrap; }
+.table-card--stock .btn, .table-card--inv .btn, .table-card--svc .btn { height: 32px; padding: 0 14px; font-size: 12px; }
+.note-box:has(.stk-log) { width: auto; max-width: none; margin-left: 0; }
+.rep-table .ep-scroll { max-height: 560px; overflow-y: auto; }
+.rep-table thead th { position: sticky; top: 0; background: #fff; z-index: 1; }
+@media print { .rep-table .ep-scroll { max-height: none; overflow: visible; } }
+.table-card--svc td:nth-child(5), .table-card--svc td:nth-child(1) { white-space: normal; }
+
+/* Appbar pelanggan di layar HP (sebelumnya meluber ~30px) */
+@media (max-width: 560px) {
+  .appbar { gap: 10px; padding: 0 12px 0 8px; }
+  .appbar__brand span { display: none; }
+  .appbar__nav { gap: 14px; font-size: 13px; }
+  .appbar__actions { gap: 8px; }
+}

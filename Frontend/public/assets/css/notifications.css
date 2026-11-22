@@ -1,0 +1,93 @@
+/* Lonceng + penanda belum dibaca */
+.bell { position: relative; }
+.bell__dot {
+  position: absolute; top: 3px; right: 4px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #d95c64; border: 2px solid var(--bg);
+}
+body.notif-lock { overflow: hidden; }
+
+.notif-overlay[hidden], .notif-panel[hidden] { display: none; }
+
+/* Latar gelap */
+.notif-overlay {
+  position: fixed; inset: 0; z-index: 40;
+  background: rgba(24, 31, 58, .4);
+  opacity: 0; visibility: hidden;
+  transition: opacity .2s ease, visibility 0s linear .2s;
+}
+.notif-overlay.is-open { opacity: 1; visibility: visible; transition: opacity .2s ease, visibility 0s; }
+
+/* Panel dari kanan */
+.notif-panel {
+  position: fixed; z-index: 50; top: 0; right: 0; bottom: 0;
+  width: min(390px, 100%);
+  display: flex; flex-direction: column;
+  background: var(--bg); color: var(--ink);
+  box-shadow: -20px 0 60px rgba(24, 31, 58, .25);
+  transform: translateX(100%); visibility: hidden;
+  transition: transform .25s ease, visibility 0s linear .25s;
+}
+.notif-panel.is-open { transform: none; visibility: visible; transition: transform .25s ease, visibility 0s; }
+
+/* Header */
+.notif-head {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+  padding: 22px 20px 16px; background: #fff; border-bottom: 2px solid var(--line);
+}
+.notif-head h2 { font-size: 22px; font-weight: 800; letter-spacing: -.2px; }
+.notif-head p { margin-top: 6px; font-size: 12px; color: var(--muted); }
+.notif-head__actions { display: flex; gap: 10px; flex: none; }
+.notif-btn, .notif-x {
+  height: 38px; border: 2px solid var(--line); border-radius: 12px;
+  background: #fff; color: var(--ink); cursor: pointer;
+  transition: border-color .15s ease;
+}
+.notif-btn { padding: 0 18px; font: inherit; font-size: 12px; font-weight: 700; }
+.notif-x { display: grid; place-items: center; width: 38px; color: var(--label); }
+.notif-btn:hover, .notif-x:hover { border-color: var(--primary); }
+.notif-btn:disabled { opacity: .5; cursor: not-allowed; border-color: var(--line); }
+
+/* Daftar */
+.notif-list { flex: 1; overflow-y: auto; padding: 14px 14px 28px; outline: 0; }
+.ngroup { display: grid; gap: 10px; }
+.ngroup + .ngroup { margin-top: 18px; }
+.ngroup__head { display: flex; align-items: center; justify-content: space-between; margin: 4px 2px 0; }
+.ngroup__head h2 { font-size: 11px; font-weight: 700; letter-spacing: .7px; text-transform: uppercase; color: var(--label); }
+.ngroup__count {
+  display: grid; place-items: center; min-width: 28px; height: 24px; padding: 0 6px;
+  border-radius: 8px; background: #dfe5f8; font-size: 11px; font-weight: 700; color: var(--label);
+}
+.notif-empty { margin-top: 60px; text-align: center; font-size: 14px; color: var(--muted); }
+
+/* Kartu notifikasi */
+.nitem {
+  position: relative; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px;
+  padding: 14px 14px 10px; background: #fff;
+  border: 2px solid var(--line); border-radius: 16px;
+}
+.nitem.is-unread { background: #eef2fd; border-color: #d9e0f5; cursor: pointer; }
+.nitem.is-unread::before {
+  content: ""; position: absolute; left: -2px; top: 12px; bottom: 12px;
+  width: 4px; border-radius: 0 4px 4px 0; background: var(--primary);
+}
+.nitem__icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; }
+.nitem__icon--blue  { background: #e3e9fb; color: var(--primary); }
+.nitem__icon--amber { background: #fff1d6; color: #d9941a; }
+.nitem__icon--green { background: #dff3e8; color: #2e9e6b; }
+
+.nitem__top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.nitem h3 { font-size: 14px; font-weight: 700; }
+.nitem__read { padding: 0; border: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer; }
+.nitem time { flex: none; font-size: 11px; color: var(--muted); }
+.nitem p { margin-top: 6px; font-size: 12px; line-height: 1.5; color: var(--muted); }
+.nitem__foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.nitem__meta { padding-bottom: 20px; font-size: 11px; color: var(--muted); }
+.nitem__side { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.nitem__del { padding: 2px 0; border: 0; background: none; font: inherit; font-size: 11px; color: var(--muted); cursor: pointer; }
+.nitem__del:hover { color: var(--ink); text-decoration: underline; }
+.nitem__read:hover { text-decoration: underline; }
+
+@media (prefers-reduced-motion: reduce) {
+  .notif-overlay, .notif-panel, .notif-btn, .notif-x { transition: none; }
+}

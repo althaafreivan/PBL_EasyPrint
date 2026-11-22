@@ -3,15 +3,29 @@ frontend/node_modules/
 frontend/dist/
 frontend/.env
 frontend/.env.local
+Frontend/.env
+Frontend/.env.local
 
 # PHP / Composer (Backend)
 backend/vendor/
 backend/.env
+backend/config/env.php
 backend/storage/*.key
 backend/storage/framework/cache/data/*
 backend/storage/framework/sessions/*
 backend/storage/framework/views/*
 backend/storage/logs/*
+
+# Berkas unggahan pelanggan (kecuali contoh data uji)
+backend/uploads/*
+!backend/uploads/contoh_dokumen_seed.pdf
+!backend/uploads/1ed50a01248e60a0df50364b0eb33185.pdf
+!backend/uploads/2ae93be1494615595684aa07f28529aa.pdf
+!backend/uploads/3ddfe7dd11081acc3c9d003e1544d8ec.pdf
+!backend/uploads/44cab45de93aadf4f1da01a996601088.pdf
+!backend/uploads/829c8ff856956f1fe841f06272488de9.pdf
+!backend/uploads/c025da2270df0733f39a29ff8491ec41.pdf
+!backend/uploads/d42802dd4644af59ad9d9de04e33d09f.pdf
 
 # OS / Editor
 .DS_Store

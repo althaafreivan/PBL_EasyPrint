@@ -8,7 +8,7 @@
 .table td .actions .btn { height: 28px; }
 
 /* ---------- Popup (dialog) ---------- */
-.mdl { width: min(520px, calc(100% - 32px)); padding: 0; border: 0; border-radius: 20px; color: #181f3a; font-family: inherit; box-shadow: 0 30px 80px rgba(24, 31, 58, .35); }
+.mdl { margin: auto; width: min(520px, calc(100% - 32px)); padding: 0; border: 0; border-radius: 20px; color: #181f3a; font-family: inherit; box-shadow: 0 30px 80px rgba(24, 31, 58, .35); }
 .mdl::backdrop { background: rgba(24, 31, 58, .5); }
 .mdl--sm { width: min(380px, calc(100% - 32px)); }
 .mdl__form { display: grid; gap: 14px; margin: 0; padding: 24px 26px 22px; }
@@ -52,7 +52,7 @@
 
 /* ---------- Dashboard Operasional ---------- */
 .opk { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-top: 30px; }
-.opk__item { display: flex; align-items: flex-start; justify-content: space-between; padding: 18px 20px; min-height: 80px; }
+.opk__item { position: relative; display: flex; align-items: flex-start; justify-content: space-between; padding: 18px 20px; min-height: 80px; }
 .opk__label { display: block; font-size: 12px; font-weight: 700; color: #5d6585; }
 .opk__value { display: block; margin-top: 6px; font-size: 32px; font-weight: 700; letter-spacing: -.5px; }
 .opk__dot { width: 22px; height: 22px; border-radius: 50%; position: relative; }

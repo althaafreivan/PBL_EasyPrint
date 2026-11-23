@@ -72,8 +72,25 @@
 .pfld-lite input:disabled { background: #f4f6fc; color: #6b7394; }
 .ep-profile .btn-cta { justify-self: start; border: 0; cursor: pointer; font-family: inherit; }
 
-/* ---------- Dialog prompt (alasan tolak/tunda) ---------- */
-.ep-prompt { display: grid; gap: 10px; min-width: min(440px, 80vw); }
+/* ---------- Modal & Dialog prompt bersama (pelanggan, admin, owner) ---------- */
+.mdl { margin: auto; width: min(520px, calc(100% - 32px)); padding: 0; border: 0; border-radius: 20px; background: #fff; color: #181f3a; font-family: inherit; box-shadow: 0 30px 80px rgba(24, 31, 58, .35); }
+.mdl::backdrop { background: rgba(24, 31, 58, .5); }
+.mdl--sm { width: min(400px, calc(100% - 32px)); }
+.mdl__sub { margin: 4px 0 0; font-size: 12.5px; line-height: 1.5; color: #5d6585; }
+.mdl__confirm { display: grid; gap: 8px; margin: 0; padding: 26px 24px 22px; text-align: center; justify-items: center; }
+.mdl__ico { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #fde6e9; color: #d9566a; }
+.mdl__confirm h2 { font-size: 18px; margin-top: 4px; }
+.mdl__confirm .mdl__sub { max-width: 30ch; }
+.mdl__actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 4px; }
+.mdl__actions--split { width: 100%; margin-top: 12px; }
+.mdl__actions--split .mdl__btn { flex: 1; }
+.mdl__btn { display: inline-flex; align-items: center; justify-content: center; height: 40px; padding: 0 24px; border: 1px solid #e6eaf8; border-radius: 999px; background: #fff; color: #181f3a; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.mdl__btn:hover { border-color: #5f7bd8; }
+.mdl__btn--primary { background: #5f7bd8; border-color: #5f7bd8; color: #fff; }
+.mdl__btn--amber { background: #e3a53b; border-color: #e3a53b; color: #fff; }
+.mdl__btn--danger { background: #d9566a; border-color: #d9566a; color: #fff; }
+.mdl__btn--primary:hover, .mdl__btn--amber:hover, .mdl__btn--danger:hover { filter: brightness(1.06); }
+.ep-prompt { display: grid; gap: 10px; margin: 0; padding: 24px 26px 22px; }
 .ep-prompt h2 { font-size: 17px; }
 .ep-label { font-size: 12px; font-weight: 600; color: #5d6585; }
 .ep-input { width: 100%; padding: 10px 12px; border: 1px solid #d5dcf1; border-radius: 10px; font: inherit; font-size: 13px; resize: vertical; }

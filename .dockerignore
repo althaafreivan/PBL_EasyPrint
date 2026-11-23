@@ -1,0 +1,15 @@
+.git
+.gitignore
+.env
+.env.local
+.neon
+neon.ts
+package.json
+package-lock.json
+node_modules/
+qa-screenshots/
+backend/.env
+backend/config/env.php
+Easy_Print_rar (3).zip
+Laporan_Milestone_2_EasyPrint.pdf
+easy_print_baru_database2

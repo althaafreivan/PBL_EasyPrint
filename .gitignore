@@ -1,3 +1,9 @@
+# Neon & Node
+.env
+.env.local
+node_modules/
+qa-screenshots/
+
 # Node (Frontend)
 frontend/node_modules/
 frontend/dist/
@@ -32,3 +38,6 @@ backend/uploads/*
 Thumbs.db
 .vscode/
 .idea/
+.neon
+node_modules/
+.env.local

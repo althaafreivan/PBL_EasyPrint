@@ -38,7 +38,10 @@
   }
 
   function bukaDialog(m, b) {
-    if (!bahan.length) return;
+    if (!bahan.length) {
+      toast('Belum ada bahan baku yang dapat direstock.', 'warn');
+      return;
+    }
     mode = m;
     err('');
     selBahan.innerHTML = bahan.map((x) => `<option value="${x.id}">${esc(x.nama)} (${esc(x.satuan)})</option>`).join('');

@@ -33,10 +33,16 @@ body.splash { align-items: center; justify-content: center; background: #181f3a;
 .pbtn--primary:hover { filter: brightness(1.06); }
 .pbtn--lg { height: 46px; padding: 0 44px; }
 .pmain { flex: 1; width: min(1268px, calc(100% - 48px)); margin: 0 auto; padding: 28px 0 56px; }
-.pubfoot { border-top: 1px solid var(--line); }
-.pubfoot__in { width: min(1268px, calc(100% - 48px)); margin: 0 auto; padding: 16px 0 22px; display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
-.pubfoot strong { color: var(--ink); }
-.pubfoot a:hover { color: var(--primary); }
+.pubfoot { padding: 26px max(24px, calc((100% - 1268px) / 2)) 18px; border-top: 1px solid var(--line); background: #181d38; color: #d3d8ea; }
+.pubfoot__in { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-bottom: 20px; }
+.pubfoot__brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.pubfoot__logo { width: 44px; height: 44px; flex: none; border-radius: 50%; object-fit: cover; }
+.pubfoot__brand strong, .pubfoot__brand small { display: block; }
+.pubfoot__brand strong { color: #fff; font-size: 15px; }
+.pubfoot__brand small { margin-top: 3px; font-size: 11px; color: #c7cde6; }
+.pubfoot__links { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 12px; font-weight: 600; }
+.pubfoot a:hover { color: #c7d2ff; }
+.pubfoot__bottom { display: flex; justify-content: space-between; gap: 12px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,.2); font-size: 10.5px; }
 .tagline { display: inline-block; padding: 5px 14px; border-radius: 999px; background: #e3eafb; color: #4466c8; font-size: 10px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; }
 
 /* ---------- Tentang Kami ---------- */
@@ -106,4 +112,10 @@ body.splash { align-items: center; justify-content: center; background: #181f3a;
   .check h1 { font-size: 36px; }
   .grid3 { grid-template-columns: 1fr; }
   .cta-band { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 600px) {
+  .pubfoot { padding: 24px 18px 16px; }
+  .pubfoot__in { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .pubfoot__links { gap: 10px 18px; }
+  .pubfoot__bottom { flex-direction: column; gap: 6px; }
 }

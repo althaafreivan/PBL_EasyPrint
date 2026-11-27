@@ -104,6 +104,10 @@
 
   // ---------------- Bill of Materials: /api/bahan-layanan
   function bukaCfg(c) {
+    if (!c && (!layanan.length || !opsiBahan.length)) {
+      toast(!layanan.length ? 'Tambahkan layanan terlebih dahulu.' : 'Tambahkan bahan baku terlebih dahulu.', 'warn');
+      return;
+    }
     editCfg = c || null;
     errCfg('');
     $('dlgCfgTitle').textContent = c ? 'Edit konfigurasi bahan' : 'Tambah konfigurasi bahan';

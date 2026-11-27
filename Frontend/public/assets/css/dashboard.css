@@ -10,8 +10,9 @@ button, select, input { font-family: inherit; }
 [hidden] { display: none !important; }
 
 /* ---------- Navbar ---------- */
-.appbar { display: flex; align-items: center; gap: 24px; height: 78px; padding: 0 40px 0 14px; background: #fff; border-bottom: 1px solid var(--line); }
+.appbar { position: relative; z-index: 30; display: flex; align-items: center; gap: 24px; height: 78px; padding: 0 40px 0 14px; background: #fff; border-bottom: 1px solid var(--line); }
 .appbar__brand { display: flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 700; }
+.appbar__brand span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .appbar__logo { width: 58px; height: 58px; border-radius: 50%; object-fit: cover; }
 .appbar__nav { margin-left: auto; display: flex; gap: 28px; font-size: 13px; font-weight: 600; color: var(--label); }
 .appbar__nav a:hover { color: var(--ink); }
@@ -23,7 +24,7 @@ button, select, input { font-family: inherit; }
 
 .usermenu { position: relative; }
 .usermenu__btn { width: 38px; height: 38px; border: 0; border-radius: 50%; background: #dfe5f8; color: var(--ink); font-size: 13px; font-weight: 700; cursor: pointer; }
-.usermenu__panel { position: absolute; right: 0; top: calc(100% + 10px); z-index: 30; width: 220px; padding: 8px; background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 18px 40px rgba(24, 31, 58, .15); }
+.usermenu__panel { position: absolute; right: 0; top: calc(100% + 10px); z-index: 30; width: min(260px, calc(100vw - 24px)); padding: 8px; background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 18px 40px rgba(24, 31, 58, .15); }
 .usermenu__who { padding: 8px 10px 10px; margin-bottom: 6px; border-bottom: 1px solid var(--line); }
 .usermenu__who strong { display: block; font-size: 12px; font-weight: 700; }
 .usermenu__who span { display: block; margin-top: 2px; font-size: 11px; color: var(--muted); }
@@ -131,9 +132,27 @@ body.notif-lock { overflow: hidden; }
   .dash-head { flex-direction: column; }
 }
 @media (max-width: 640px) {
-  .appbar__brand span { font-size: 14px; }
-  .appbar__nav { gap: 14px; }
+  .appbar { height: 66px; gap: 10px; padding: 0 12px 0 10px; }
+  .appbar__brand { flex: 1 1 auto; gap: 8px; min-width: 0; font-size: 14px; }
+  .appbar__logo { width: 42px; height: 42px; }
+  .appbar__nav { flex: none; gap: 12px; font-size: 12px; }
+  .appbar__nav a { white-space: nowrap; }
+  .appbar__actions { flex: none; gap: 8px; }
+  .appbar__bell { width: 30px; height: 30px; }
+  .usermenu__btn { width: 34px; height: 34px; }
+  .page { width: calc(100% - 32px); padding: 20px 0 40px; }
   .greet { font-size: 28px; }
+  .greet__sub { font-size: 13px; line-height: 1.5; }
+  .dash-head { gap: 14px; }
+  .dash-head .btn-cta { width: 100%; padding: 0 20px; }
+  .stats { gap: 12px; margin-top: 20px; }
+  .stat { min-height: 88px; padding: 16px 18px; }
+  .stat__value { font-size: 28px; }
+  .section-title { margin: 26px 0 14px; font-size: 22px; }
+  .catalog { gap: 12px; }
+  .svc__foot { align-items: flex-start; }
+  .btn-pick { padding: 0 22px; flex: none; }
+  .orders { padding: 6px 14px 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .btn-cta, .notif-overlay, .notif-panel { transition: none; }

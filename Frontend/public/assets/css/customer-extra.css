@@ -108,3 +108,31 @@
   .hsearch { width: 100%; }
   .notice { flex-wrap: wrap; }
 }
+@media (max-width: 600px) {
+  .trk-head { margin-top: 18px; padding: 18px; }
+  .trk-head__code { flex-wrap: wrap; font-size: 18px; }
+  .trk-head__right { width: 100%; align-items: stretch; flex-direction: column; gap: 10px; }
+  .trk-head__right .btn-outline { width: 100%; }
+  .trk-steps { overflow-x: auto; }
+  .stepper2 { min-width: 460px; }
+  .stepper2__item strong { font-size: 10px; }
+  .trk-card { padding: 18px; }
+  .log li { grid-template-columns: 1fr; gap: 4px; }
+  .sumlist div { align-items: flex-start; gap: 10px; }
+  .sumlist dt { flex: 0 0 30%; }
+  .sumlist dd { min-width: 0; }
+  .hist-card { padding: 14px 12px 16px; }
+  .hist-tools { align-items: stretch; }
+  .tabs { flex-wrap: nowrap; width: 100%; overflow-x: auto; padding: 2px 2px 8px; }
+  .tab { flex: none; }
+  .hsearch { width: 100%; }
+  .hist-actions { gap: 10px; flex-wrap: wrap; }
+  .hist-foot { align-items: flex-start; }
+  .success { margin-top: 18px; padding: 24px 16px; }
+  .success h1 { font-size: 21px; }
+  .success__sum { gap: 10px; padding: 12px; }
+  .success__actions { flex-direction: column; }
+  .success__actions > * { width: 100%; }
+  .notice { align-items: flex-start; }
+  .notice .btn-fill { width: 100%; }
+}

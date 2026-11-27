@@ -126,12 +126,13 @@
 /* ---------- Dialog ---------- */
 .dlg {
   margin: auto; width: min(440px, calc(100% - 32px)); padding: 0; border: 0; border-radius: 20px;
+  max-height: calc(100vh - 32px); overflow-y: auto; overscroll-behavior: contain;
   color: var(--ink); box-shadow: 0 30px 80px rgba(24,31,58,.35);
 }
 .dlg::backdrop { background: rgba(24,31,58,.45); }
-.dlg form { display: grid; gap: 14px; padding: 26px; }
+.dlg form { display: grid; min-width: 0; gap: 14px; padding: 26px; }
 .dlg h2 { font-size: 20px; font-weight: 700; }
-.dlg__actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 6px; }
+.dlg__actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
 .dlg .btn-ghost, .dlg .btn-main { height: 44px; padding: 0 28px; font-size: 14px; }
 
 /* ---------- Kasir ---------- */
@@ -171,6 +172,12 @@
 @media (max-width: 560px) {
   .kpis, .kpis--3 { grid-template-columns: 1fr; }
   .supply, .fld-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .dlg { width: calc(100% - 24px); max-height: calc(100vh - 24px); border-radius: 16px; }
+  .dlg form, .dlg__body { padding: 20px 16px; }
+  .dlg__actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dlg__actions .btn-ghost, .dlg__actions .btn-main { width: 100%; padding: 0 12px; }
 }
 @media (prefers-reduced-motion: reduce) { .btn-main { transition: none; } }
 
